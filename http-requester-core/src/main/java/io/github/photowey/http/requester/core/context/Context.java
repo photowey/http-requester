@@ -13,13 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.api;
+package io.github.photowey.http.requester.core.context;
+
+import io.github.photowey.http.requester.core.header.Header;
+import io.github.photowey.http.requester.core.parameter.Parameter;
+import io.github.photowey.http.requester.core.request.Request;
 
 /**
- * {@code RequestExecutor}
+ * {@code Context}
  *
  * @author photowey
  * @version 1.0.0
  * @since 2024/10/13
  */
-public interface RequestExecutor {}
+public interface Context {
+
+    Request request();
+
+    Header header();
+
+    Parameter parameter();
+}

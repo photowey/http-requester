@@ -318,6 +318,7 @@ limitations under the License.
                         <exclude>**/*.cmd</exclude>
                         <exclude>**/*.sh</exclude>
                         <exclude>**/shared/**/*.*</exclude>
+                        <exclude>**/shaded/**/*.*</exclude>
                     </excludes>
                     <strictCheck>true</strictCheck>
                     <mapping>
