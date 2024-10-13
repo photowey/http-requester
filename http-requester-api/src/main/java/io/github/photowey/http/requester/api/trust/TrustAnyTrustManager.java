@@ -13,16 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.httpclient;
+package io.github.photowey.http.requester.api.trust;
 
-import io.github.photowey.http.requester.api.executor.RequestExecutor;
+import javax.net.ssl.X509TrustManager;
+import java.security.cert.X509Certificate;
 
 /**
- * {@code HttpclientRequestExecutor}
- * |- {@code Apache Http Client} request executor.
+ * {@code TrustAnyTrustManager}
  *
  * @author photowey
- * @version 1.0.0
  * @since 2024/10/13
  */
-public interface HttpclientRequestExecutor extends RequestExecutor {}
+public class TrustAnyTrustManager implements X509TrustManager {
+
+    @Override
+    public void checkClientTrusted(X509Certificate[] chain, String authType) {
+
+    }
+
+    @Override
+    public void checkServerTrusted(X509Certificate[] chain, String authType) {
+
+    }
+
+    @Override
+    public X509Certificate[] getAcceptedIssuers() {
+        return new X509Certificate[0];
+    }
+}
