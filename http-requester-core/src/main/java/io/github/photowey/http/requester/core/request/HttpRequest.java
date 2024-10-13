@@ -13,16 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.httpclient;
+package io.github.photowey.http.requester.core.request;
 
-import io.github.photowey.http.requester.api.executor.RequestExecutor;
+import io.github.photowey.http.requester.core.constant.HttpConstants;
+import io.github.photowey.http.requester.core.shaded.org.springframework.http.HttpMethod;
 
 /**
- * {@code HttpclientRequestExecutor}
- * |- {@code Apache Http Client} request executor.
+ * {@code HttpRequest}
  *
  * @author photowey
  * @version 1.0.0
  * @since 2024/10/13
  */
-public interface HttpclientRequestExecutor extends RequestExecutor {}
+public interface HttpRequest extends Request {
+
+    @Override
+    default String protocol() {
+        return HttpConstants.Protocol.HTTP;
+    }
+
+    HttpMethod method();
+}

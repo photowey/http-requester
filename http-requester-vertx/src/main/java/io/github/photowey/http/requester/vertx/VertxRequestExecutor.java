@@ -15,7 +15,7 @@
  */
 package io.github.photowey.http.requester.vertx;
 
-import io.github.photowey.http.requester.api.RequestExecutor;
+import io.github.photowey.http.requester.api.executor.RequestExecutor;
 
 /**
  * {@code VertxRequestExecutor}

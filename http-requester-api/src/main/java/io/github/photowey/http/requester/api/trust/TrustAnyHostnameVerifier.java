@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.httpclient;
+package io.github.photowey.http.requester.api.trust;
 
-import io.github.photowey.http.requester.api.executor.RequestExecutor;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 
 /**
- * {@code HttpclientRequestExecutor}
- * |- {@code Apache Http Client} request executor.
+ * {@code TrustAnyHostnameVerifier}
  *
  * @author photowey
  * @version 1.0.0
  * @since 2024/10/13
  */
-public interface HttpclientRequestExecutor extends RequestExecutor {}
+public class TrustAnyHostnameVerifier implements HostnameVerifier {
+
+    @Override
+    public boolean verify(String hostname, SSLSession session) {
+        return true;
+    }
+}

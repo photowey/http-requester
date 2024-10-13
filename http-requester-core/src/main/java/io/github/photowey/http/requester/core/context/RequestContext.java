@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.httpclient;
+package io.github.photowey.http.requester.core.context;
 
-import io.github.photowey.http.requester.api.executor.RequestExecutor;
+import io.github.photowey.http.requester.core.request.HttpRequest;
 
 /**
- * {@code HttpclientRequestExecutor}
- * |- {@code Apache Http Client} request executor.
+ * {@code RequestContext}
  *
  * @author photowey
  * @version 1.0.0
  * @since 2024/10/13
  */
-public interface HttpclientRequestExecutor extends RequestExecutor {}
+public interface RequestContext extends Context {
+
+    @Override
+    HttpRequest request();
+}
