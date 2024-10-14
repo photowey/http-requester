@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.core.parameter;
+package io.github.photowey.http.requester.okhttp.core.parameter;
 
-import io.github.photowey.http.requester.okhttp.OkhttpRequestExecutor;
+import io.github.photowey.http.requester.okhttp.executor.OkHttpRequestExecutor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 import java.net.URLConnection;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
@@ -30,20 +35,21 @@ import java.util.function.Function;
  * @version 1.0.0
  * @since 2024/10/13
  */
-public class BinaryMultipartParameters implements MultipartParameter {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class BinaryMultipartParameters implements OkHttpMultipartParameter {
 
     private String name;
     private byte[] bytes;
 
-    // Unsupported
-    // public BinaryMultipartParameters() {}
-
-    public BinaryMultipartParameters(String name, byte[] data) {
-        this.name = name;
-        this.bytes = data;
-    }
-
     // ----------------------------------------------------------------
+
+    @Override
+    public boolean isEmpty() {
+        return null == this.bytes || this.bytes.length == 0;
+    }
 
     @Override
     public boolean containsKey(String name) {
@@ -51,19 +57,19 @@ public class BinaryMultipartParameters implements MultipartParameter {
     }
 
     @Override
-    public MultipartParameter set(String name, Object value) {
+    public OkHttpMultipartParameter set(String name, Object value) {
         throw new UnsupportedOperationException("Unsupported now");
     }
 
     @Override
-    public MultipartParameter set(String name, byte[] value) {
+    public OkHttpMultipartParameter set(String name, byte[] value) {
         this.name = name;
 
         return this;
     }
 
     @Override
-    public MultipartParameter set(Map<String, Object> parameters) {
+    public OkHttpMultipartParameter set(Map<String, Object> parameters) {
         throw new UnsupportedOperationException("Unsupported now");
     }
 
@@ -87,13 +93,24 @@ public class BinaryMultipartParameters implements MultipartParameter {
         throw new UnsupportedOperationException("Unsupported now");
     }
 
+    @Override
+    public void forEach(BiConsumer<String, Object> fx) {
+        fx.accept(this.name, this.bytes);
+    }
+
+    @Override
+    public <T> void forEach(BiConsumer<String, T> fx, Function<Object, T> transformer) {
+        fx.accept(this.name, transformer.apply(this.bytes));
+    }
+
     // ----------------------------------------------------------------
 
-    public MediaType toMediaType() {
+    @Override
+    public MediaType tryMediaType() {
         String mimeType = URLConnection.guessContentTypeFromName(this.getName());
         MediaType contentType = MediaType.parse(mimeType);
         if (null == contentType) {
-            contentType = OkhttpRequestExecutor.STREAM;
+            contentType = OkHttpRequestExecutor.STREAM;
         }
 
         return contentType;
@@ -101,8 +118,9 @@ public class BinaryMultipartParameters implements MultipartParameter {
 
     // ----------------------------------------------------------------
 
+    @Override
     public RequestBody toRequestBody() {
-        MediaType contentType = this.toMediaType();
+        MediaType contentType = this.tryMediaType();
         byte[] input = this.bytes();
 
         return RequestBody.create(contentType, input);

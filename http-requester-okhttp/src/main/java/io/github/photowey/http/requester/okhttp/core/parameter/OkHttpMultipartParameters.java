@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.core.parameter;
+package io.github.photowey.http.requester.okhttp.core.parameter;
+
+import io.github.photowey.http.requester.core.parameter.MultipartParameter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -26,27 +28,27 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0.0
  * @since 2024/10/13
  */
-public class RequestMultipartParameters extends AbstractMultipartParameter {
+public class OkHttpMultipartParameters extends AbstractMultipartParameter {
 
     private final ConcurrentHashMap<String, Object> ctx;
 
     // ----------------------------------------------------------------
 
-    private static final RequestMultipartParameters EMPTY = new RequestMultipartParameters(0);
+    private static final OkHttpMultipartParameters EMPTY = new OkHttpMultipartParameters(0);
 
     // ----------------------------------------------------------------
 
-    public RequestMultipartParameters() {
+    public OkHttpMultipartParameters() {
         this.ctx = new ConcurrentHashMap<>();
     }
 
-    public RequestMultipartParameters(int initialCapacity) {
+    public OkHttpMultipartParameters(int initialCapacity) {
         this.ctx = new ConcurrentHashMap<>(initialCapacity);
     }
 
     // ----------------------------------------------------------------
 
-    public static RequestMultipartParameters empty() {
+    public static OkHttpMultipartParameters empty() {
         return EMPTY;
     }
 
@@ -59,13 +61,13 @@ public class RequestMultipartParameters extends AbstractMultipartParameter {
 
     // ----------------------------------------------------------------
 
-    public <T> RequestMultipartParameters set(String key, T value) {
+    public <T> OkHttpMultipartParameters set(String key, T value) {
         this.ctx.put(key, value);
 
         return this;
     }
 
-    public <T> RequestMultipartParameters set(Map<String, T> parameters) {
+    public <T> OkHttpMultipartParameters set(Map<String, T> parameters) {
         this.ctx.putAll(parameters);
 
         return this;
