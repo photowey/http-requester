@@ -16,6 +16,7 @@
 package io.github.photowey.http.requester.core.request;
 
 import io.github.photowey.http.requester.core.header.Header;
+import io.github.photowey.http.requester.core.parameter.Parameter;
 
 /**
  * {@code Request}
@@ -32,6 +33,8 @@ public interface Request {
     String uri();
 
     String body();
+
+    Parameter parameter();
 
     Header header();
 }

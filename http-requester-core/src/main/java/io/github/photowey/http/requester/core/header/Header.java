@@ -31,6 +31,14 @@ public interface Header {
 
     // ----------------------------------------------------------------
 
+    default boolean isNotEmpty() {
+        return !this.isEmpty();
+    }
+
+    boolean isEmpty();
+
+    // ----------------------------------------------------------------
+
     boolean containsKey(String key);
 
     // ----------------------------------------------------------------

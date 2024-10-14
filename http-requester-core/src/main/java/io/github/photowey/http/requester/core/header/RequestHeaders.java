@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class RequestHeaders implements Header {
 
-    private final ConcurrentHashMap<String, List<Object>> HEADERS;
+    private final ConcurrentHashMap<String, List<Object>> headers;
 
     // ----------------------------------------------------------------
 
@@ -42,11 +42,11 @@ public class RequestHeaders implements Header {
     // ----------------------------------------------------------------
 
     public RequestHeaders() {
-        this.HEADERS = new ConcurrentHashMap<>();
+        this.headers = new ConcurrentHashMap<>();
     }
 
     public RequestHeaders(int initialCapacity) {
-        this.HEADERS = new ConcurrentHashMap<>(initialCapacity);
+        this.headers = new ConcurrentHashMap<>(initialCapacity);
     }
 
     // ----------------------------------------------------------------
@@ -58,22 +58,29 @@ public class RequestHeaders implements Header {
     // ----------------------------------------------------------------
 
     @Override
+    public boolean isEmpty() {
+        return this.headers.isEmpty();
+    }
+
+    // ----------------------------------------------------------------
+
+    @Override
     public boolean containsKey(String key) {
-        return HEADERS.containsKey(key);
+        return headers.containsKey(key);
     }
 
     // ----------------------------------------------------------------
 
     @Override
     public Header set(String key, Object value) {
-        HEADERS.put(key, Collections.singletonList(value));
+        headers.put(key, Collections.singletonList(value));
 
         return this;
     }
 
     @Override
     public Header set(String key, List<Object> values) {
-        HEADERS.put(key, values);
+        headers.put(key, values);
 
         return this;
     }
@@ -89,8 +96,8 @@ public class RequestHeaders implements Header {
 
     @Override
     public Object get(String key) {
-        if (HEADERS.containsKey(key)) {
-            return HEADERS.get(key).get(0);
+        if (headers.containsKey(key)) {
+            return headers.get(key).get(0);
         }
 
         return null;
@@ -98,8 +105,8 @@ public class RequestHeaders implements Header {
 
     @Override
     public <T> T get(String key, Function<Object, T> transformer) {
-        if (HEADERS.containsKey(key)) {
-            return transformer.apply(HEADERS.get(key).get(0));
+        if (headers.containsKey(key)) {
+            return transformer.apply(headers.get(key).get(0));
         }
 
         return null;
@@ -109,8 +116,8 @@ public class RequestHeaders implements Header {
 
     @Override
     public List<Object> gets(String key) {
-        if (HEADERS.containsKey(key)) {
-            return HEADERS.get(key);
+        if (headers.containsKey(key)) {
+            return headers.get(key);
         }
 
         return new ArrayList<>(0);
@@ -118,8 +125,8 @@ public class RequestHeaders implements Header {
 
     @Override
     public <T> List<T> gets(String key, Function<Object, T> transformer) {
-        if (HEADERS.containsKey(key)) {
-            return HEADERS.get(key)
+        if (headers.containsKey(key)) {
+            return headers.get(key)
                 .stream()
                 .map(transformer)
                 .collect(Collectors.toList());
@@ -132,14 +139,14 @@ public class RequestHeaders implements Header {
 
     @Override
     public void forEach(BiConsumer<String, Object> fx) {
-        HEADERS.forEach((k, v) -> {
+        headers.forEach((k, v) -> {
             fx.accept(k, v.get(0));
         });
     }
 
     @Override
     public <T> void forEach(BiConsumer<String, T> fx, Function<Object, T> transformer) {
-        HEADERS.forEach((k, v) -> {
+        headers.forEach((k, v) -> {
             fx.accept(k, transformer.apply(v.get(0)));
         });
     }
@@ -148,12 +155,12 @@ public class RequestHeaders implements Header {
 
     @Override
     public void forEaches(BiConsumer<String, List<Object>> fx) {
-        HEADERS.forEach(fx);
+        headers.forEach(fx);
     }
 
     @Override
     public <T> void forEaches(BiConsumer<String, List<T>> fx, Function<Object, T> transformer) {
-        HEADERS.forEach((k, v) -> {
+        headers.forEach((k, v) -> {
             fx.accept(k, v.stream().map(transformer).collect(Collectors.toList()));
         });
     }

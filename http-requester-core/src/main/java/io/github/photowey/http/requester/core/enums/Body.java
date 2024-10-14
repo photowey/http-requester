@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.core.context;
-
-import io.github.photowey.http.requester.core.request.HttpRequest;
+package io.github.photowey.http.requester.core.enums;
 
 /**
- * {@code RequestContext}
+ * {@code Body}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/10/14
  */
-public interface RequestContext extends Context {
+public enum Body {
 
-    @Override
-    HttpRequest request();
+    JSON,
+    FORM,
 
-    boolean newClient();
+    ;
 }

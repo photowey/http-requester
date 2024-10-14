@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
@@ -52,6 +53,13 @@ public class RequestParameters implements Parameter {
 
     public static RequestParameters empty() {
         return EMPTY;
+    }
+
+    // ----------------------------------------------------------------
+
+    @Override
+    public boolean isEmpty() {
+        return this.parameters.isEmpty();
     }
 
     // ----------------------------------------------------------------
@@ -106,5 +114,19 @@ public class RequestParameters implements Parameter {
         });
 
         return tmap;
+    }
+
+    // ----------------------------------------------------------------
+
+    @Override
+    public void forEach(BiConsumer<String, Object> fx) {
+        this.parameters.forEach(fx);
+    }
+
+    @Override
+    public <T> void forEach(BiConsumer<String, T> fx, Function<Object, T> transformer) {
+        this.parameters.forEach((k, v) -> {
+            fx.accept(k, transformer.apply(v));
+        });
     }
 }

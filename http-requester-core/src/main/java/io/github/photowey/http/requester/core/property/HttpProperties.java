@@ -124,6 +124,32 @@ public class HttpProperties implements Serializable {
             private boolean enabled = true;
             private boolean force = false;
         }
+
+        public Sign sign() {
+            return sign;
+        }
+
+        public List<String> ignoreApis() {
+            return ignoreApis;
+        }
+    }
+
+    // ----------------------------------------------------------------
+
+    public OkHttp okHttp() {
+        return okHttp;
+    }
+
+    public Httpclient httpclient() {
+        return httpclient;
+    }
+
+    public Vertx vertx() {
+        return vertx;
+    }
+
+    public Logger logger() {
+        return logger;
     }
 }
 

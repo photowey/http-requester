@@ -16,6 +16,7 @@
 package io.github.photowey.http.requester.core.parameter;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
@@ -30,6 +31,14 @@ public interface MultipartParameter {
     String name();
 
     byte[] bytes();
+
+    // ----------------------------------------------------------------
+
+    default boolean isNotEmpty() {
+        return !this.isEmpty();
+    }
+
+    boolean isEmpty();
 
     // ----------------------------------------------------------------
 
@@ -54,4 +63,10 @@ public interface MultipartParameter {
     Map<String, Object> values();
 
     <T> Map<String, T> values(Function<Object, T> transformer);
+
+    // ----------------------------------------------------------------
+
+    void forEach(BiConsumer<String, Object> fx);
+
+    <T> void forEach(BiConsumer<String, T> fx, Function<Object, T> transformer);
 }
