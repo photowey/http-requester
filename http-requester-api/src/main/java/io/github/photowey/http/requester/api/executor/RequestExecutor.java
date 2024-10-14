@@ -30,25 +30,57 @@ public interface RequestExecutor {
 
     // ---------------------------------------------------------
 
-    String doGet(String url);
+    String AND = "&";
+    String EMPTY_STRING = "";
+    String EQUAL = "=";
+    String QUESTION_MARK = "?";
 
-    String doGet(String url, Parameter parameters);
-
-    String doGet(String url, Header headers);
-
-    String doGet(String url, Parameter parameters, Header headers);
-
-    // ---------------------------------------------------------
-
-    String doPost(String url, Parameter parameters);
-
-    String doPost(String url, Parameter parameters, Header headers);
+    String REGEX_TRIM_PREFIX_AND = "^&*";
 
     // ---------------------------------------------------------
 
-    String doPost(String url, String body);
+    String get(String url);
 
-    String doPost(String url, String body, Header headers);
+    String get(String url, Parameter parameters);
+
+    String get(String url, Header headers);
+
+    String get(String url, Parameter parameters, Header headers);
+
+    // ---------------------------------------------------------
+
+    String form(String url, Parameter parameters);
+
+    String form(String url, Parameter parameters, Header headers);
+
+    // ---------------------------------------------------------
+
+    String post(String url, String body);
+
+    String post(String url, String body, Header headers);
+
+    // ---------------------------------------------------------
+
+    String put(String url, String body);
+
+    String put(String url, String body, Header headers);
+
+    // ---------------------------------------------------------
+
+    String patch(String url, String body);
+
+    String patch(String url, String body, Header headers);
+
+    // ---------------------------------------------------------
+
+    String delete(String url);
+
+    String delete(String url, Header headers);
+
+    // ---------------------------------------------------------
 
     String execute(RequestContext context);
+
+    // ---------------------------------------------------------
+
 }
