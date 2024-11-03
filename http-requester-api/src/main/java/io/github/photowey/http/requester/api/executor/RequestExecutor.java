@@ -16,8 +16,6 @@
 package io.github.photowey.http.requester.api.executor;
 
 import io.github.photowey.http.requester.core.context.RequestContext;
-import io.github.photowey.http.requester.core.header.Header;
-import io.github.photowey.http.requester.core.parameter.Parameter;
 
 /**
  * {@code RequestExecutor}
@@ -26,7 +24,7 @@ import io.github.photowey.http.requester.core.parameter.Parameter;
  * @version 1.0.0
  * @since 2024/10/13
  */
-public interface RequestExecutor {
+public interface RequestExecutor extends GetExecutor, PostExecutor, PutExecutor, PatchExecutor, DeleteExecutor {
 
     // ---------------------------------------------------------
 
@@ -37,50 +35,7 @@ public interface RequestExecutor {
 
     String REGEX_TRIM_PREFIX_AND = "^&*";
 
-    // ---------------------------------------------------------
-
-    String get(String url);
-
-    String get(String url, Parameter parameters);
-
-    String get(String url, Header headers);
-
-    String get(String url, Parameter parameters, Header headers);
-
-    // ---------------------------------------------------------
-
-    String form(String url, Parameter parameters);
-
-    String form(String url, Parameter parameters, Header headers);
-
-    // ---------------------------------------------------------
-
-    String post(String url, String body);
-
-    String post(String url, String body, Header headers);
-
-    // ---------------------------------------------------------
-
-    String put(String url, String body);
-
-    String put(String url, String body, Header headers);
-
-    // ---------------------------------------------------------
-
-    String patch(String url, String body);
-
-    String patch(String url, String body, Header headers);
-
-    // ---------------------------------------------------------
-
-    String delete(String url);
-
-    String delete(String url, Header headers);
-
-    // ---------------------------------------------------------
-
     String execute(RequestContext context);
 
     // ---------------------------------------------------------
-
 }

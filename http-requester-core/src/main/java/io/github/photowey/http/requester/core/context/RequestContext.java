@@ -29,5 +29,9 @@ public interface RequestContext extends Context {
     @Override
     HttpRequest request();
 
+    // ----------------------------------------------------------------
+
     boolean newClient();
+
+    RequestContext newClient(boolean newClient);
 }

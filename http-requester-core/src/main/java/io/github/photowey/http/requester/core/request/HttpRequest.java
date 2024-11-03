@@ -16,7 +16,6 @@
 package io.github.photowey.http.requester.core.request;
 
 import io.github.photowey.http.requester.core.constant.HttpConstants;
-import io.github.photowey.http.requester.core.enums.Body;
 import io.github.photowey.http.requester.core.parameter.MultipartParameter;
 import io.github.photowey.http.requester.core.shaded.org.springframework.http.HttpMethod;
 
@@ -33,8 +32,6 @@ public interface HttpRequest extends Request {
     default String protocol() {
         return HttpConstants.Protocol.HTTP;
     }
-
-    Body bodyType();
 
     HttpMethod method();
 

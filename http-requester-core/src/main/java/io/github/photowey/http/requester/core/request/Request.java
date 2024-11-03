@@ -29,12 +29,11 @@ public interface Request {
 
     String protocol();
 
-
     String uri();
-
-    String body();
 
     Parameter parameter();
 
     Header header();
+
+    RequestBody body();
 }

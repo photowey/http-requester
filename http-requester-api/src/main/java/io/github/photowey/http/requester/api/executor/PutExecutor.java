@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.core.context;
+package io.github.photowey.http.requester.api.executor;
 
+import io.github.photowey.http.requester.core.context.RequestContext;
 import io.github.photowey.http.requester.core.header.Header;
-import io.github.photowey.http.requester.core.parameter.Parameter;
-import io.github.photowey.http.requester.core.request.Request;
 
 /**
- * {@code Context}
+ * {@code PutExecutor}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface Context {
+public interface PutExecutor {
 
-    Request request();
+    String put(String url, String body);
 
-    Header header();
+    String put(String url, String body, Header headers);
 
-    Parameter parameter();
-
-    // ----------------------------------------------------------------
-
-    Context request(Request request);
-
-    Context header(Header header);
-
-    Context parameter(Parameter parameter);
+    String put(RequestContext context);
 }
