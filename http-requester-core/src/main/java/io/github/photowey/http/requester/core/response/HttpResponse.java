@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.api.executor;
-
-import io.github.photowey.http.requester.core.context.RequestContext;
+package io.github.photowey.http.requester.core.response;
 
 /**
- * {@code RequestExecutor}
+ * {@code HttpResponse}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface RequestExecutor extends
-    GetExecutor, PostExecutor, PutExecutor, PatchExecutor, DeleteExecutor, Executor {
+public interface HttpResponse<T> extends Response {
 
-    String execute(RequestContext context);
+    T body();
 }

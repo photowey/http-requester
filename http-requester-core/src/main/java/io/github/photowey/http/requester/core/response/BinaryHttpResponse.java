@@ -13,36 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.core.request;
+package io.github.photowey.http.requester.core.response;
 
 import io.github.photowey.http.requester.core.enums.Body;
-import io.github.photowey.http.requester.core.header.Header;
-import io.github.photowey.http.requester.core.parameter.Parameter;
-import io.github.photowey.http.requester.core.response.EmptyHttpResponse;
-import io.github.photowey.http.requester.core.response.Response;
+import io.github.photowey.http.requester.core.shaded.org.springframework.core.io.Resource;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * {@code Request}
+ * {@code BinaryHttpResponse}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface Request {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class BinaryHttpResponse implements HttpResponse<Resource> {
 
-    String protocol();
+    private static final long serialVersionUID = 157040778950912338L;
 
-    String uri();
+    private Body type;
+    private Resource body;
 
-    Parameter parameter();
+    @Override
+    public Body type() {
+        return Body.BINARY;
+    }
 
-    Header header();
-
-    RequestBody body();
-
-    default Response response() {
-        return EmptyHttpResponse.builder()
-            .type(Body.VOID)
-            .build();
+    @Override
+    public Resource body() {
+        return this.body;
     }
 }

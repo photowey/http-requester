@@ -34,9 +34,13 @@ public interface PostExecutor {
 
     // ---------------------------------------------------------
 
-    String post(String url, String body);
+    <T> String post(String url, T body);
 
-    String post(String url, String body, Header headers);
+    <T> String post(String url, T body, Header headers);
+
+    <T> String post(String url, T body, Parameter parameters);
+
+    <T> String post(String url, T body, Parameter parameters, Header headers);
 
     // ---------------------------------------------------------
 

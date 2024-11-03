@@ -13,19 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.api.executor;
+package io.github.photowey.http.requester.core.response;
 
-import io.github.photowey.http.requester.core.context.RequestContext;
+import io.github.photowey.http.requester.core.enums.Body;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * {@code RequestExecutor}
+ * {@code StringHttpResponse}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface RequestExecutor extends
-    GetExecutor, PostExecutor, PutExecutor, PatchExecutor, DeleteExecutor, Executor {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class StringHttpResponse implements HttpResponse<String> {
 
-    String execute(RequestContext context);
+    private static final long serialVersionUID = 157040778950912338L;
+
+    private Body type;
+    private String body;
+
+    @Override
+    public Body type() {
+        return Body.STRING;
+    }
+
+    @Override
+    public String body() {
+        return this.body;
+    }
 }

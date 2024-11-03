@@ -17,6 +17,7 @@ package io.github.photowey.http.requester.api.executor;
 
 import io.github.photowey.http.requester.core.context.RequestContext;
 import io.github.photowey.http.requester.core.header.Header;
+import io.github.photowey.http.requester.core.parameter.Parameter;
 
 /**
  * {@code DeleteExecutor}
@@ -29,7 +30,11 @@ public interface DeleteExecutor {
 
     String delete(String url);
 
+    String delete(String url, Parameter parameters);
+
     String delete(String url, Header headers);
+
+    String delete(String url, Parameter parameters, Header headers);
 
     String delete(RequestContext context);
 }

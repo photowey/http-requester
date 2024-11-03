@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.http.requester.api.executor;
+package io.github.photowey.http.requester.core.response;
 
-import io.github.photowey.http.requester.core.context.RequestContext;
+import io.github.photowey.http.requester.core.enums.Body;
+
+import java.io.Serializable;
 
 /**
- * {@code RequestExecutor}
+ * {@code Response}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface RequestExecutor extends
-    GetExecutor, PostExecutor, PutExecutor, PatchExecutor, DeleteExecutor, Executor {
+public interface Response extends Serializable {
 
-    String execute(RequestContext context);
+    Body type();
 }

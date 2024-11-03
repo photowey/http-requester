@@ -15,17 +15,19 @@
  */
 package io.github.photowey.http.requester.api.executor;
 
-import io.github.photowey.http.requester.core.context.RequestContext;
-
 /**
- * {@code RequestExecutor}
+ * {@code Executor}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/10/13
+ * @since 2024/11/03
  */
-public interface RequestExecutor extends
-    GetExecutor, PostExecutor, PutExecutor, PatchExecutor, DeleteExecutor, Executor {
+public interface Executor {
 
-    String execute(RequestContext context);
+    String AND = "&";
+    String EMPTY_STRING = "";
+    String EQUAL = "=";
+    String QUESTION_MARK = "?";
+
+    String REGEX_TRIM_PREFIX_AND = "^&*";
 }

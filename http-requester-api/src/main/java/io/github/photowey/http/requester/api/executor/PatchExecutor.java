@@ -17,6 +17,7 @@ package io.github.photowey.http.requester.api.executor;
 
 import io.github.photowey.http.requester.core.context.RequestContext;
 import io.github.photowey.http.requester.core.header.Header;
+import io.github.photowey.http.requester.core.parameter.Parameter;
 
 /**
  * {@code PatchExecutor}
@@ -27,9 +28,13 @@ import io.github.photowey.http.requester.core.header.Header;
  */
 public interface PatchExecutor {
 
-    String patch(String url, String body);
+    <T> String patch(String url, T body);
 
-    String patch(String url, String body, Header headers);
+    <T> String patch(String url, T body, Header headers);
+
+    <T> String patch(String url, T body, Parameter parameters);
+
+    <T> String patch(String url, T body, Parameter parameters, Header headers);
 
     String patch(RequestContext context);
 }

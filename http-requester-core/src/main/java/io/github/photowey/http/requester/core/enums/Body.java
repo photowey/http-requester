@@ -24,8 +24,39 @@ package io.github.photowey.http.requester.core.enums;
  */
 public enum Body {
 
-    JSON,
-    FORM,
+    JSON("application/json; charset=UTF-8", 1),
+    FORM("application/x-www-form-urlencoded", 2),
+
+    // ----------------------------------------------------------------
+
+    TXT("text/plain", 4),
+    XML("text/xml", 8),
+    HTML("text/html", 16),
+
+    // ----------------------------------------------------------------
+
+    BINARY("application/octet-stream", 32),
+
+    // ----------------------------------------------------------------
+
+    STRING("application/octet-stream", 64),
+    VOID("text/void", 128),
 
     ;
+
+    private final String type;
+    private final int value;
+
+    Body(String type, int value) {
+        this.type = type;
+        this.value = value;
+    }
+
+    public String type() {
+        return type;
+    }
+
+    public int value() {
+        return value;
+    }
 }
